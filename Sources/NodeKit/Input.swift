@@ -9,28 +9,28 @@ import Foundation
 import Combine
 
 @propertyWrapper
-class Input<Value>: InputProtocol, Identifiable {
-    let name: String
-    let id: UUID = UUID()
+public class Input<Value>: InputProtocol, Identifiable {
+    public let name: String
+    public let id: UUID = UUID()
     private var cancellable: AnyCancellable?
     
-    var defaultValue: Any
-    var wrappedValue: Value {
+    public var defaultValue: Any
+    public var wrappedValue: Value {
         didSet {
             // You can add didSet logic here if needed
         }
     }
-    var projectedValue: Input<Value> {
+    public var projectedValue: Input<Value> {
         return self
     }
     
-    var connectedOutput: OutputProtocol? {
+    public var connectedOutput: OutputProtocol? {
         didSet {
             establishBinding()
         }
     }
     
-    var value: Any {
+    public var value: Any {
         get { wrappedValue }
         set { wrappedValue = newValue as! Value }
     }
@@ -41,7 +41,7 @@ class Input<Value>: InputProtocol, Identifiable {
         self.defaultValue = defaultValue
     }
     
-    func updateValueFromConnection() {
+    public func updateValueFromConnection() {
         if let outputValue = connectedOutput?.value as? Value {
             wrappedValue = outputValue
         }

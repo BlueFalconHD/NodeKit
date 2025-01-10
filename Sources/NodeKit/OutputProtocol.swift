@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol OutputProtocol: AnyObject {
+public protocol OutputProtocol: AnyObject {
     var name: String { get }
     var id: UUID { get }
     var value: Any { get set }

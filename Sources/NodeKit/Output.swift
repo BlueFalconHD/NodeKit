@@ -8,21 +8,21 @@
 import Foundation
 
 @propertyWrapper
-class Output<Value>: OutputProtocol, Identifiable, ObservableObject {
-    let name: String
-    let id: UUID = UUID()
-    var connectedInputs: [InputProtocol] = []
+public class Output<Value>: OutputProtocol, Identifiable, ObservableObject {
+    public let name: String
+    public let id: UUID = UUID()
+    public var connectedInputs: [InputProtocol] = []
     
-    @Published var wrappedValue: Value {
+    @Published public var wrappedValue: Value {
         didSet {
             propagateValue()
         }
     }
-    var projectedValue: Output<Value> {
+    public var projectedValue: Output<Value> {
         return self
     }
     
-    var value: Any {
+    public var value: Any {
         get { wrappedValue }
         set { wrappedValue = newValue as! Value }
     }
@@ -32,7 +32,7 @@ class Output<Value>: OutputProtocol, Identifiable, ObservableObject {
         self.name = name
     }
     
-    func propagateValue() {
+    public func propagateValue() {
         for input in connectedInputs {
             (input as? Input<Value>)?.wrappedValue = wrappedValue
         }

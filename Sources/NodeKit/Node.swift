@@ -5,11 +5,14 @@
 //  Created by Hayes Dombroski on 1/8/25.
 //
 
-protocol Node: AnyObject {
+import SwiftUI
+
+public protocol Node: AnyObject, ObservableObject {
     func process()
+    var view: (any View)? { get }
 }
 
-extension Node {
+public extension Node {
     var inputs: [String: InputProtocol] {
         var inputs = [String: InputProtocol]()
         let mirror = Mirror(reflecting: self)
